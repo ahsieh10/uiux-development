@@ -1,0 +1,87 @@
+[
+    {
+      "name": "Farewell, Neverland",
+      "artist": "TXT",
+      "minutes": 3,
+      "seconds": 0,
+      "image": "images/TXT_-_The_Name_Chapter_Temptation.png"
+    },
+    {
+      "name": "Very Nice",
+      "artist": "Seventeen",
+      "minutes": 3,
+      "seconds": 12,
+      "image": "images/VeryNice.jpeg"
+    },
+    {
+      "name": "Go Big or Go Home",
+      "artist": "Enhypen",
+      "minutes": 3,
+      "seconds": 21,
+      "image": "images/GoBigOrGoHome.jpeg"
+    },
+    {
+      "name": "Hitori no Yoru",
+      "artist": "TXT",
+      "minutes": 3,
+      "seconds": 38,
+      "image": "images/HitoriNoYoru.jpeg"
+    },
+    {
+      "name": "Eternally",
+      "artist": "TXT",
+      "minutes": 3,
+      "seconds": 37,
+      "image": "images/Eternally.jpeg"
+    },
+    {
+      "name": "Circles",
+      "artist": "Seventeen",
+      "minutes": 3,
+      "seconds": 12,
+      "image": "images/Circles.jpeg"
+    },
+    {
+      "name": "Drama",
+      "artist": "aespa",
+      "minutes": 3,
+      "seconds": 34,
+      "image": "images/Drama.jpeg"
+    },
+    {
+      "name": "Bite Me",
+      "artist": "Enhypen",
+      "minutes": 2,
+      "seconds": 37,
+      "image": "images/BiteMe.jpeg"
+    },
+    {
+      "name": "2 minus 1",
+      "artist": "Seventeen",
+      "minutes": 3,
+      "seconds": 10,
+      "image": "images/2Minus1.jpeg"
+    },
+    {
+      "name": "Opening Sequence",
+      "artist": "TXT",
+      "minutes": 2,
+      "seconds": 57,
+      "image": "images/OpeningSequence.jpeg"
+    },
+    {
+      "name": "Kidult",
+      "artist": "Seventeen",
+      "minutes": 3,
+      "seconds": 12,
+      "image": "images/Kidult.jpeg"
+    },
+    {
+      "name": "Next Level",
+      "artist": "aespa",
+      "minutes": 3,
+      "seconds": 41,
+      "image": "images/NextLevel.jpeg"
+    }
+  ]
+  
