@@ -17,7 +17,9 @@ export default function Song(props){
     useGrouping: false
   })}
             </Card.Text>
-            <Button variant="primary">Add To playlist</Button>
+            <Button variant="primary" onClick={() => {
+              props.cartAdder(props.item)
+            }}>Add To playlist</Button>
       </Card.Body>
     </Card>
     );

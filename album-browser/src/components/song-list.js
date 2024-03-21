@@ -32,7 +32,7 @@ export default function SongList(props){
     return (
         <div>
             {finalList.map((song, index) => (
-        <Song item={song}/>
+        <Song item={song} cartAdder={props.cartAdder}/>
       ))}
         </div>
     );

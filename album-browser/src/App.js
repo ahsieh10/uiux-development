@@ -5,13 +5,16 @@ import songData from "./assets/all-songs.json";
 import SongList from './components/song-list.js';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
+import CartList from './components/cart-list.js';
+import Button from 'react-bootstrap/Button';
+import { timeInSeconds } from './components/util.js';
 
 songData.forEach((item) => {
   item.image = process.env.PUBLIC_URL + "/" + item.image;
 });
 
 function App() {
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState([]);
   const [length, setLength] = useState(190);
   const [filterLength, setFilterLength] = useState(false);
   const [filterArtist, setFilterArtist] = useState({
@@ -22,8 +25,7 @@ function App() {
   }); //change based on artists
   const [sort, setSort] = useState(false);
   const [ascending, setAscending] = useState(true);
-  const [playlistMinutes, setPlaylistMinutes] = useState(0);
-  const [playlistSeconds, setPlaylistSeconds] = useState(0);
+  const [playlistLength, setPlaylistLength] = useState(0);
   function changeArtistFilter(artist){
     const filterArtistCopy = {...filterArtist};
     filterArtistCopy[artist] = !filterArtistCopy[artist];
@@ -39,6 +41,14 @@ function App() {
       elem.disabled = true;
       setSort(false);
     }
+  }
+
+  function removeSong(song){
+    const index = cart.indexOf(song);
+    var newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+    setPlaylistLength(playlistLength - timeInSeconds(song.minutes, song.seconds));
   }
 
   const changeSortingMethod = () => {
@@ -63,6 +73,39 @@ function App() {
     const elem = document.getElementById('song-range');
     setLength(elem.value);
     console.log(elem.value);
+  }
+
+  function addToCart(song){
+    var newCart = [...cart];
+    newCart.push(song);
+    setCart(newCart);
+    setPlaylistLength(playlistLength + timeInSeconds(song.minutes, song.seconds));
+  }
+
+  const resetFilters = () => {
+    setLength(190);
+    document.getElementById('song-range').value=190;
+    setFilterLength(false);
+    document.getElementById('range-switch').checked=false;
+    document.getElementById('song-range').disabled = true;
+    setFilterArtist({
+      'TXT':true,
+      'Seventeen':true,
+      'Enhypen':true,
+      'aespa':true,
+    });
+    //FIGURE OUT UI
+    const keys = Object.keys(filterArtist);
+    for(var i = 0; i < keys.length; i++){
+      console.log(i);
+      var elem = document.getElementById(keys[i]);
+      elem.checked=true;
+    }
+    setSort(false);
+    document.getElementById('sort').checked=false;
+    setAscending(true);
+    document.getElementById('sort-ascending').checked=true;
+    document.getElementById('isSorting').disabled=true;
   }
 
   return (
@@ -93,21 +136,21 @@ function App() {
                   <Accordion.Body>
                     <Form.Check
                       type='checkbox'
-                      id='txt'
+                      id='TXT'
                       defaultChecked = 'true'
                       label='TXT'
                       onClick={() => changeArtistFilter('TXT')}
                     />
                     <Form.Check
                       type='checkbox'
-                      id='seventeen'
+                      id='Seventeen'
                       defaultChecked = 'true'
                       label='Seventeen'
                       onClick={() => changeArtistFilter('Seventeen')}
                     />
                     <Form.Check
                       type='checkbox'
-                      id='enhypen'
+                      id='Enhypen'
                       defaultChecked = 'true'
                       label='Enhypen'
                       onClick={() => changeArtistFilter('Enhypen')}
@@ -122,7 +165,7 @@ function App() {
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                  <Accordion.Header>Filter by Price</Accordion.Header>
+                  <Accordion.Header>Filter by Length</Accordion.Header>
                   <Accordion.Body>
                     <Form.Check 
                       type="checkbox"
@@ -131,7 +174,10 @@ function App() {
                       onChange={enableRangeFilter}
                     />
                     <>
-                    <Form.Label>Display songs under: {Math.floor(length / 60)}:{length % 60}</Form.Label>
+                    <Form.Label>Display songs under: {Math.floor(length / 60)}:{(length % 60).toLocaleString('en-US', {
+                    minimumIntegerDigits: 2,
+                    useGrouping: false
+                  })}</Form.Label>
                     <Form.Range min='120' max='240' id='song-range' onChange = {changeFilterRange} disabled/>
                     </>
                   </Accordion.Body>
@@ -170,8 +216,18 @@ function App() {
         </Accordion>
       }
       {
-      <SongList lengthFilter = {filterLength} length = {length} artists = {filterArtist} sort = {sort} ascending = {ascending}/>
+        <Button onClick={resetFilters}>Reset Filters</Button>
       }
+      {
+      <SongList lengthFilter = {filterLength} length = {length} artists = {filterArtist} sort = {sort} ascending = {ascending} cartAdder={addToCart}/>
+      }
+      {
+        <CartList cart={cart} cartRemover={removeSong}/>
+      }
+      <div>Total length of playlist: {Math.floor(playlistLength / 60)}:{(playlistLength % 60).toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  })}</div>
       </body>
     </div>
   );
