@@ -163,12 +163,8 @@ function App() {
                         <Accordion.Body>
                           <ListGroup>
                           <ListGroup.Item >
-                          <Form.Check 
-                            type="checkbox"
-                            id="range-switch"
-                            label="Filter on"
-                            onChange={enableRangeFilter}
-                          />
+                          <div>Filter On</div>
+                          <input type='checkbox' onChange={enableRangeFilter} label='Filter on'></input>
                           </ListGroup.Item>
                           <ListGroup.Item>
                               <>
