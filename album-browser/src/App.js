@@ -164,7 +164,7 @@ function App() {
                           <ListGroup>
                           <ListGroup.Item >
                           <div>Filter On</div>
-                          <input type='checkbox' onChange={enableRangeFilter} label='Filter on'></input>
+                          <input type='checkbox' onChange={enableRangeFilter} label='Filter on' id='range-switch'></input>
                           </ListGroup.Item>
                           <ListGroup.Item>
                               <>
